@@ -11,9 +11,10 @@ async function init() {
         label TEXT NOT NULL,
         description TEXT NOT NULL,
         price REAL NOT NULL,
-        image_path TEXT NOT NULL
+        image_path TEXT NOT NULL,
+        sold INTEGER DEFAULT 0
       )
-    `
+    `,
   );
 
   console.log("Table created successfully!");

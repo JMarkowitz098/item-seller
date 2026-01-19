@@ -4,6 +4,7 @@ export type Item = {
   description: string;
   price: number;
   image_path: string;
+  sold?: boolean;
 };
 
 export function ItemCard({ item }: { item: Item }) {

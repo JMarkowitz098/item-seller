@@ -1,21 +1,19 @@
-import { Link } from "react-router";
+import { Form, Link } from "react-router";
+import { updateItem } from "~/server/db/queries";
 import type { Item } from "./ItemCard";
 
-export function AdminItemsList({ items }: { items: Item[] }) {
+export function SoldItemsList({ items }: { items: Item[] }) {
+  const handleMarkAsUnsold = async (itemId: number) => {
+    await updateItem(itemId, { sold: false });
+    window.location.href = "/admin";
+  };
+
   return (
     <main className="p-8">
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold">Admin - My Stuff</h1>
-        <Link
-          to="/admin/items/new"
-          className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
-        >
-          Add Item
-        </Link>
-      </div>
+      <h1 className="text-3xl font-bold mb-8">Sold Items</h1>
 
       {items.length === 0 ? (
-        <p className="text-center">No items found</p>
+        <p className="text-center">No sold items found</p>
       ) : (
         <div className="overflow-x-auto">
           <table className="w-full border-collapse">
@@ -42,19 +40,19 @@ export function AdminItemsList({ items }: { items: Item[] }) {
                     >
                       Edit
                     </Link>
-                    <form
-                      action="/admin/mark-sold"
+                    <Form
                       method="post"
+                      action="/admin/mark-unsold"
                       style={{ display: "inline" }}
                     >
                       <input type="hidden" name="id" value={item.id} />
                       <button
                         type="submit"
-                        className="px-3 py-1 bg-orange-600 text-white text-sm rounded hover:bg-orange-700"
+                        className="px-3 py-1 bg-green-600 text-white text-sm rounded hover:bg-green-700"
                       >
-                        Mark as Sold
+                        Mark as Unsold
                       </button>
-                    </form>
+                    </Form>
                     <form
                       action="/admin/items/delete"
                       method="post"

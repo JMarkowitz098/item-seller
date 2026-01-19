@@ -6,6 +6,7 @@ export const items = sqliteTable("items", {
   description: text("description").notNull(),
   price: real("price").notNull(),
   image_path: text("image_path").notNull(),
+  sold: integer("sold", { mode: "boolean" }).notNull().default(false),
 });
 
 export type Item = typeof items.$inferSelect;

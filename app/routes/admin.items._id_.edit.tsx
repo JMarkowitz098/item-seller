@@ -23,6 +23,14 @@ export async function action({ request, params }: Route.ActionArgs) {
 
   const id = parseInt(params.id);
   const formData = await request.formData();
+  const action = formData.get("_action") as string;
+
+  // Handle mark as sold
+  if (action === "mark-as-sold") {
+    await updateItem(id, { sold: true });
+    return redirect("/admin/sold");
+  }
+
   const label = formData.get("label") as string;
   const description = formData.get("description") as string;
   const price = parseFloat(formData.get("price") as string);

@@ -9,6 +9,9 @@ export default [
     route("items/pdf", "routes/admin.items.pdf.tsx"),
     route("items/delete", "routes/admin.items.delete.tsx"),
     route("items/:id/edit", "routes/admin.items._id_.edit.tsx"),
+    route("sold", "routes/admin.sold.tsx"),
+    route("mark-sold", "routes/admin.mark-sold.tsx"),
+    route("mark-unsold", "routes/admin.mark-unsold.tsx"),
     route("logout", "routes/admin.logout.tsx"),
   ]),
 ] satisfies RouteConfig;

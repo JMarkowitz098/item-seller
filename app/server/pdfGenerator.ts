@@ -11,7 +11,10 @@ export async function generateItemsPDF(items: Item[], baseUrl: string) {
 
   // Add title
   doc.fontSize(28).font("Helvetica-Bold").text("My Stuff", { align: "center" });
-  doc.fontSize(12).font("Helvetica").text("Items List & Catalog", { align: "center" });
+  doc
+    .fontSize(12)
+    .font("Helvetica")
+    .text("Items List & Catalog", { align: "center" });
   doc.moveDown(1.5);
 
   // Draw a box around QR code
@@ -30,13 +33,17 @@ export async function generateItemsPDF(items: Item[], baseUrl: string) {
   doc.moveDown(0.5);
 
   // Add scan instruction
-  doc.fontSize(10)
+  doc
+    .fontSize(10)
     .font("Helvetica-Oblique")
     .text("Scan QR code to view items online", { align: "center" });
   doc.moveDown(1.5);
 
   // Add separator line
-  doc.moveTo(40, doc.y).lineTo(doc.page.width - 40, doc.y).stroke();
+  doc
+    .moveTo(40, doc.y)
+    .lineTo(doc.page.width - 40, doc.y)
+    .stroke();
   doc.moveDown(1);
 
   // Add items list header
@@ -45,10 +52,14 @@ export async function generateItemsPDF(items: Item[], baseUrl: string) {
 
   // Add items with better formatting
   items.forEach((item, index) => {
-    doc.fontSize(11).font("Helvetica-Bold").text(`${index + 1}. ${item.description}`, {
-      continued: false,
-    });
-    doc.fontSize(10)
+    doc
+      .fontSize(11)
+      .font("Helvetica-Bold")
+      .text(`${index + 1}. ${item.description}`, {
+        continued: false,
+      });
+    doc
+      .fontSize(10)
       .font("Helvetica")
       .text(`Price: $${item.price.toFixed(2)}`, { color: "#333" });
     doc.moveDown(0.6);
@@ -56,13 +67,20 @@ export async function generateItemsPDF(items: Item[], baseUrl: string) {
 
   // Add footer
   doc.moveDown(1);
-  doc.moveTo(40, doc.y).lineTo(doc.page.width - 40, doc.y).stroke();
-  doc.fontSize(9)
+  doc
+    .moveTo(40, doc.y)
+    .lineTo(doc.page.width - 40, doc.y)
+    .stroke();
+  doc
+    .fontSize(9)
     .font("Helvetica")
-    .text(`Generated on ${new Date().toLocaleDateString()} at ${new Date().toLocaleTimeString()}`, {
-      align: "center",
-      color: "#666",
-    });
+    .text(
+      `Generated on ${new Date().toLocaleDateString()} at ${new Date().toLocaleTimeString()}`,
+      {
+        align: "center",
+        color: "#666",
+      }
+    );
 
   return doc;
 }

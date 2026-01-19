@@ -68,13 +68,26 @@ export function ItemForm({
         )}
       </div>
 
-      <button
-        type="submit"
-        disabled={isLoading}
-        className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50"
-      >
-        {isLoading ? "Saving..." : item ? "Update Item" : "Create Item"}
-      </button>
+      <div className="flex gap-2">
+        <button
+          type="submit"
+          disabled={isLoading}
+          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50"
+        >
+          {isLoading ? "Saving..." : item ? "Update Item" : "Create Item"}
+        </button>
+        {item && (
+          <button
+            type="submit"
+            name="_action"
+            value="mark-as-sold"
+            disabled={isLoading}
+            className="px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 disabled:opacity-50"
+          >
+            Mark as Sold
+          </button>
+        )}
+      </div>
     </Form>
   );
 }

@@ -10,7 +10,7 @@ export async function createItem(item: NewItem): Promise<Item | null> {
 
 export async function updateItem(
   id: number,
-  item: Partial<NewItem>
+  item: Partial<NewItem>,
 ): Promise<Item | null> {
   const result = await db
     .update(items)
@@ -28,4 +28,12 @@ export async function deleteItem(id: number): Promise<boolean> {
 export async function getItemById(id: number): Promise<Item | null> {
   const result = await db.select().from(items).where(eq(items.id, id));
   return result[0] || null;
+}
+
+export async function getAllItems(): Promise<Item[]> {
+  return await db.select().from(items).where(eq(items.sold, false));
+}
+
+export async function getSoldItems(): Promise<Item[]> {
+  return await db.select().from(items).where(eq(items.sold, true));
 }

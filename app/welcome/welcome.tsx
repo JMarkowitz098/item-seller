@@ -1,6 +1,7 @@
 import { useLoaderData } from "react-router";
 import { db } from "~/server/db/index.js";
 import { items as itemsTable } from "~/server/db/schema.js";
+import { eq } from "drizzle-orm";
 
 export type Item = {
   id: number;
@@ -12,7 +13,10 @@ export type Item = {
 
 export async function loader() {
   try {
-    const allItems = await db.select().from(itemsTable);
+    const allItems = await db
+      .select()
+      .from(itemsTable)
+      .where(eq(itemsTable.sold, false));
     return allItems;
   } catch (error) {
     console.error("Error loading items:", error);

@@ -4,10 +4,14 @@ import { db } from "~/server/db/index.js";
 import { items as itemsTable } from "~/server/db/schema.js";
 import { ItemsIndex } from "~/components/ItemsIndex";
 import type { Item } from "~/components/ItemCard";
+import { eq } from "drizzle-orm";
 
 export async function loader() {
   try {
-    const allItems = await db.select().from(itemsTable);
+    const allItems = await db
+      .select()
+      .from(itemsTable)
+      .where(eq(itemsTable.sold, false));
     return allItems as Item[];
   } catch (error) {
     console.error("Error loading items:", error);
