@@ -1,5 +1,5 @@
 import type { Route } from "./+types/admin.contact";
-import { redirect, useLoaderData } from "react-router";
+import { redirect, useLoaderData, useActionData } from "react-router";
 import { db } from "~/server/db/index.js";
 import { settings as settingsTable } from "~/server/db/schema.js";
 import { ContactInfo } from "~/components/ContactInfo";
@@ -30,7 +30,7 @@ export async function action({ request }: Route.ActionArgs) {
 
   try {
     await updateSettings({ contactName, contactPhone, contactEmail });
-    return redirect("/admin/contact");
+    return { success: true };
   } catch (error) {
     console.error("Error updating contact info:", error);
     return { error: "Failed to update contact info" };
@@ -46,9 +46,20 @@ export function meta({}: Route.MetaArgs) {
 
 export default function ContactPage() {
   const settings = useLoaderData<typeof loader>();
+  const actionData = useActionData<typeof action>();
 
   return (
     <main className="p-8">
+      {actionData?.success && (
+        <div className="mb-6 p-4 bg-green-100 text-green-700 rounded-lg">
+          Contact information saved successfully!
+        </div>
+      )}
+      {actionData?.error && (
+        <div className="mb-6 p-4 bg-red-100 text-red-700 rounded-lg">
+          {actionData.error}
+        </div>
+      )}
       <ContactInfo settings={settings} />
     </main>
   );

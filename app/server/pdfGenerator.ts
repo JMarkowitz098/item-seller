@@ -95,22 +95,5 @@ export async function generateItemsPDF(
     doc.moveDown(0.6);
   });
 
-  // Add footer
-  doc.moveDown(1);
-  doc
-    .moveTo(40, doc.y)
-    .lineTo(doc.page.width - 40, doc.y)
-    .stroke();
-  doc
-    .fontSize(9)
-    .font("Helvetica")
-    .text(
-      `Generated on ${new Date().toLocaleDateString()} at ${new Date().toLocaleTimeString()}`,
-      {
-        align: "center",
-        color: "#666",
-      },
-    );
-
   return doc;
 }
