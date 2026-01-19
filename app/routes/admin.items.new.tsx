@@ -2,6 +2,7 @@ import type { Route } from "./+types/admin.items.new";
 import { redirect } from "react-router";
 import { ItemForm } from "~/components/ItemForm";
 import { createItem } from "~/server/db/queries";
+import { handleImageUpload } from "~/server/imageHandler";
 
 export async function action({ request }: Route.ActionArgs) {
   if (request.method !== "POST") {
@@ -12,7 +13,14 @@ export async function action({ request }: Route.ActionArgs) {
   const label = formData.get("label") as string;
   const description = formData.get("description") as string;
   const price = parseFloat(formData.get("price") as string);
-  const image_path = formData.get("image_path") as string;
+
+  let image_path = "/images/placeholder.jpg"; // default
+
+  // Handle image upload if provided
+  const imagePath = await handleImageUpload(formData);
+  if (imagePath) {
+    image_path = imagePath;
+  }
 
   try {
     await createItem({ label, description, price, image_path });

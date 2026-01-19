@@ -9,7 +9,11 @@ export function ItemForm({
   isLoading?: boolean;
 }) {
   return (
-    <Form method="post" className="space-y-4 max-w-2xl">
+    <Form
+      method="post"
+      encType="multipart/form-data"
+      className="space-y-4 max-w-2xl"
+    >
       <div>
         <label className="block text-sm font-medium mb-1">Label</label>
         <input
@@ -45,15 +49,23 @@ export function ItemForm({
       </div>
 
       <div>
-        <label className="block text-sm font-medium mb-1">Image Path</label>
+        <label className="block text-sm font-medium mb-1">Image</label>
         <input
-          type="text"
-          name="image_path"
-          defaultValue={item?.image_path || ""}
-          placeholder="/images/item.jpg"
-          required
+          type="file"
+          name="image"
+          accept="image/*"
           className="w-full px-3 py-2 border border-gray-300 rounded-lg"
         />
+        {item?.image_path && (
+          <div className="mt-2">
+            <p className="text-sm text-gray-600 mb-2">Current image:</p>
+            <img
+              src={item.image_path}
+              alt={item.label}
+              className="max-w-xs max-h-48 rounded"
+            />
+          </div>
+        )}
       </div>
 
       <button

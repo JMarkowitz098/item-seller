@@ -3,9 +3,11 @@ import { useLoaderData } from "react-router";
 import { db } from "~/server/db/index.js";
 import { items as itemsTable } from "~/server/db/schema.js";
 import { AdminItemsList } from "~/components/AdminItemsList";
+import { requireAdminAuth } from "~/server/requireAuth";
 import type { Item } from "~/components/ItemCard";
 
-export async function loader() {
+export async function loader({ request }: Route.LoaderArgs) {
+  await requireAdminAuth(request);
   try {
     const allItems = await db.select().from(itemsTable);
     return allItems as Item[];
