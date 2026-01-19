@@ -13,3 +13,29 @@ body {
     color-scheme: dark;
   }
 }
+
+@layer components {
+  .item-card {
+    @apply bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow;
+  }
+
+  .item-image {
+    @apply w-full aspect-square object-cover;
+  }
+
+  .item-info {
+    @apply p-4;
+  }
+
+  .item-title {
+    @apply font-semibold;
+  }
+
+  .item-price {
+    @apply text-lg font-bold text-green-600;
+  }
+
+  .items-grid {
+    @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6;
+  }
+}
