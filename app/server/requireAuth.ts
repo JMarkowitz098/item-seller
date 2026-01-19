@@ -7,7 +7,8 @@ export async function requireAdminAuth(request: Request) {
   }
 
   const session = await getSession(request);
-  const isAuthenticated = session.has("authenticated") && session.get("authenticated");
+  const isAuthenticated =
+    session.has("authenticated") && session.get("authenticated");
   const is2FAVerified = session.get("2faVerified");
 
   if (!isAuthenticated || !is2FAVerified) {

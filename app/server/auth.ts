@@ -7,7 +7,7 @@ const ADMIN_2FA_SECRET = process.env.ADMIN_2FA_SECRET;
 
 export async function verifyPassword(password: string): Promise<boolean> {
   if (process.env.SKIP_AUTH === "true") return true;
-  
+
   // Simple string comparison for development
   return password === ADMIN_PASSWORD;
 }

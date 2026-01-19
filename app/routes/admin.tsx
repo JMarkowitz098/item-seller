@@ -10,7 +10,11 @@ export default function AdminLayout() {
             <a href="/admin" className="hover:underline">
               Items
             </a>
-            <Form method="post" action="/admin/logout" style={{ display: "inline" }}>
+            <Form
+              method="post"
+              action="/admin/logout"
+              style={{ display: "inline" }}
+            >
               <button
                 type="submit"
                 className="px-3 py-1 bg-red-600 hover:bg-red-700 rounded text-sm"

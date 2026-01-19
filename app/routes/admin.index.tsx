@@ -26,5 +26,18 @@ export function meta({}: Route.MetaArgs) {
 
 export default function AdminIndex() {
   const items = useLoaderData<typeof loader>();
-  return <AdminItemsList items={items} />;
+  return (
+    <div>
+      <div className="p-8 border-b flex justify-between items-center">
+        <h2 className="text-xl font-bold">Items Management</h2>
+        <a
+          href="/admin/items/pdf"
+          className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
+        >
+          Download PDF
+        </a>
+      </div>
+      <AdminItemsList items={items} />
+    </div>
+  );
 }
