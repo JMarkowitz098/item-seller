@@ -70,12 +70,7 @@ export function ItemForm({
       </div>
 
       <div className="flex gap-2">
-        <Button
-          type="submit"
-          disabled={isLoading}
-          variant="primary"
-          size="md"
-        >
+        <Button type="submit" disabled={isLoading} variant="primary" size="md">
           {isLoading ? "Saving..." : item ? "Update Item" : "Create Item"}
         </Button>
         {item && (

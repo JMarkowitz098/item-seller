@@ -3,8 +3,7 @@ import React from "react";
 type ButtonVariant = "primary" | "secondary" | "danger" | "success" | "warning";
 type ButtonSize = "sm" | "md" | "lg";
 
-interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
   size?: ButtonSize;
   children: React.ReactNode;

@@ -3,8 +3,7 @@ import { Button } from "./Button";
 
 type ActionType = "edit" | "delete" | "mark-sold" | "mark-unsold" | "submit";
 
-interface ActionButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface ActionButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   actionType: ActionType;
   children: React.ReactNode;
 }

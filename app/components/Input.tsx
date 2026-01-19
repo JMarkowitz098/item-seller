@@ -14,10 +14,7 @@ export function Input({ label, error, className = "", ...props }: InputProps) {
       {label && (
         <label className="block text-sm font-medium mb-1">{label}</label>
       )}
-      <input
-        className={`${baseStyles} ${className}`}
-        {...props}
-      />
+      <input className={`${baseStyles} ${className}`} {...props} />
       {error && <p className="text-red-600 text-sm mt-1">{error}</p>}
     </div>
   );
