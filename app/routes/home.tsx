@@ -2,14 +2,8 @@ import type { Route } from "./+types/home";
 import { useLoaderData } from "react-router";
 import { db } from "~/server/db/index.js";
 import { items as itemsTable } from "~/server/db/schema.js";
-
-type Item = {
-  id: number;
-  label: string;
-  description: string;
-  price: number;
-  image_path: string;
-};
+import { ItemsIndex } from "~/components/ItemsIndex";
+import type { Item } from "~/components/ItemCard";
 
 export async function loader() {
   try {
@@ -28,32 +22,7 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
-const renderItem = (item: Item) => {
-  const { id, label, description, price, image_path } = item;
-  return (
-    <section key={String(id)} className="item-card">
-      <img src={image_path} alt={label} className="item-image" />
-      <div className="item-info">
-        <p className="item-title">{description}</p>
-        <p className="item-price">${String(price)}</p>
-      </div>
-    </section>
-  );
-};
-
 export default function Home() {
   const items = useLoaderData<typeof loader>();
-
-  return (
-    <main className="p-8">
-      <h1 className="text-3xl font-bold mb-8">My Stuff</h1>
-      {items.length === 0 ? (
-        <p className="text-center">No items found</p>
-      ) : (
-        <div className="items-grid">
-          {items.map((item) => renderItem(item))}
-        </div>
-      )}
-    </main>
-  );
+  return <ItemsIndex items={items} />;
 }
