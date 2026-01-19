@@ -16,7 +16,18 @@ async function init() {
       )
     `,
   );
+  console.log("Creating settings table...");
 
+  await db.run(
+    sql`
+      CREATE TABLE IF NOT EXISTS settings (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        contact_name TEXT,
+        contact_phone TEXT,
+        contact_email TEXT
+      )
+    `,
+  );
   console.log("Table created successfully!");
 }
 

@@ -34,12 +34,23 @@ export default function AdminIndex() {
     <div>
       <div className="p-8 border-b flex justify-between items-center">
         <h2 className="text-xl font-bold">Items Management</h2>
-        <a
-          href="/admin/items/pdf"
-          className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
-        >
-          Download PDF
-        </a>
+        <div className="flex gap-2">
+          <a
+            href="/admin/items/pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+          >
+            Preview PDF
+          </a>
+          <a
+            href="/admin/items/pdf"
+            download="items.pdf"
+            className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
+          >
+            Download PDF
+          </a>
+        </div>
       </div>
       <ItemsTable
         items={items}

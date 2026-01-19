@@ -5,6 +5,7 @@ export default [
   route("login", "routes/login.tsx"),
   route("admin", "routes/admin.tsx", [
     route("", "routes/admin.index.tsx"),
+    route("contact", "routes/admin.contact.tsx"),
     route("items/new", "routes/admin.items.new.tsx"),
     route("items/pdf", "routes/admin.items.pdf.tsx"),
     route("items/delete", "routes/admin.items.delete.tsx"),

@@ -9,7 +9,8 @@ async function seed() {
       label: "anime_poster",
       description: "Sniper Ragnarok Online Poster",
       price: 15.99,
-      image_path: "/images/1768784343997_Sniper._Ragnarok.Online_.full.638118.jpg",
+      image_path:
+        "/images/1768784343997_Sniper._Ragnarok.Online_.full.638118.jpg",
     },
     {
       label: "banana_bed_1",

@@ -1,8 +1,13 @@
 import PDFDocument from "pdfkit";
 import QRCode from "qrcode";
 import type { Item } from "~/components/ItemCard";
+import type { Settings } from "./db/schema";
 
-export async function generateItemsPDF(items: Item[], baseUrl: string) {
+export async function generateItemsPDF(
+  items: Item[],
+  baseUrl: string,
+  settings?: Settings | null,
+) {
   const doc = new PDFDocument({ margin: 40 });
   const qrCodeUrl = `${baseUrl}`;
 
@@ -16,6 +21,31 @@ export async function generateItemsPDF(items: Item[], baseUrl: string) {
     .font("Helvetica")
     .text("Items List & Catalog", { align: "center" });
   doc.moveDown(1.5);
+
+  // Add contact info if available
+  if (
+    settings?.contactName ||
+    settings?.contactPhone ||
+    settings?.contactEmail
+  ) {
+    doc.fontSize(11).font("Helvetica-Bold").text("Contact Information:");
+    if (settings?.contactName) {
+      doc.fontSize(10).font("Helvetica").text(`Name: ${settings.contactName}`);
+    }
+    if (settings?.contactPhone) {
+      doc
+        .fontSize(10)
+        .font("Helvetica")
+        .text(`Phone: ${settings.contactPhone}`);
+    }
+    if (settings?.contactEmail) {
+      doc
+        .fontSize(10)
+        .font("Helvetica")
+        .text(`Email: ${settings.contactEmail}`);
+    }
+    doc.moveDown(1.5);
+  }
 
   // Draw a box around QR code
   const boxSize = 180;
@@ -79,7 +109,7 @@ export async function generateItemsPDF(items: Item[], baseUrl: string) {
       {
         align: "center",
         color: "#666",
-      }
+      },
     );
 
   return doc;

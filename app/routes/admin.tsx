@@ -22,6 +22,9 @@ export default function AdminLayout() {
             <a href="/admin/sold" className={isActive("/admin/sold")}>
               Sold Items
             </a>
+            <a href="/admin/contact" className={isActive("/admin/contact")}>
+              Contact Info
+            </a>
             <a
               href="/"
               className="px-3 py-1 bg-blue-600 hover:bg-blue-700 rounded text-sm inline-flex items-center gap-2"
