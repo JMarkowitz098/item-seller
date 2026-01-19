@@ -1,4 +1,5 @@
 import { Form } from "react-router";
+import { Button } from "./Button";
 import type { Item } from "./ItemCard";
 
 export function ItemForm({
@@ -21,7 +22,7 @@ export function ItemForm({
           name="label"
           defaultValue={item?.label || ""}
           required
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
         />
       </div>
 
@@ -32,7 +33,7 @@ export function ItemForm({
           name="description"
           defaultValue={item?.description || ""}
           required
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
         />
       </div>
 
@@ -44,7 +45,7 @@ export function ItemForm({
           step="0.01"
           defaultValue={item?.price || ""}
           required
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
         />
       </div>
 
@@ -69,23 +70,25 @@ export function ItemForm({
       </div>
 
       <div className="flex gap-2">
-        <button
+        <Button
           type="submit"
           disabled={isLoading}
-          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50"
+          variant="primary"
+          size="md"
         >
           {isLoading ? "Saving..." : item ? "Update Item" : "Create Item"}
-        </button>
+        </Button>
         {item && (
-          <button
+          <Button
             type="submit"
             name="_action"
             value="mark-as-sold"
             disabled={isLoading}
-            className="px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 disabled:opacity-50"
+            variant="warning"
+            size="md"
           >
             Mark as Sold
-          </button>
+          </Button>
         )}
       </div>
     </Form>

@@ -2,7 +2,7 @@ import type { Route } from "./+types/admin.sold";
 import { useLoaderData } from "react-router";
 import { db } from "~/server/db/index.js";
 import { items as itemsTable } from "~/server/db/schema.js";
-import { SoldItemsList } from "~/components/SoldItemsList";
+import { ItemsTable } from "~/components/ItemsTable";
 import { requireAdminAuth } from "~/server/requireAuth";
 import type { Item } from "~/components/ItemCard";
 import { eq } from "drizzle-orm";
@@ -31,11 +31,26 @@ export function meta({}: Route.MetaArgs) {
 export default function SoldIndex() {
   const items = useLoaderData<typeof loader>();
   return (
-    <div>
-      <div className="p-8 border-b">
-        <h2 className="text-xl font-bold">Sold Items Management</h2>
-      </div>
-      <SoldItemsList items={items} />
-    </div>
+    <ItemsTable
+      items={items}
+      title="Sold Items"
+      actions={[
+        {
+          type: "edit",
+          label: "Edit",
+          route: "",
+        },
+        {
+          type: "mark-unsold",
+          label: "Mark as Unsold",
+          route: "/admin/mark-unsold",
+        },
+        {
+          type: "delete",
+          label: "Delete",
+          route: "/admin/items/delete",
+        },
+      ]}
+    />
   );
 }

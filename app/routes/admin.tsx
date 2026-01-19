@@ -1,10 +1,13 @@
 import { Outlet, Form, useLocation } from "react-router";
+import { Button } from "~/components/Button";
 
 export default function AdminLayout() {
   const location = useLocation();
 
   const isActive = (path: string) => {
-    return location.pathname === path ? "underline text-blue-300" : "hover:underline";
+    return location.pathname === path
+      ? "underline text-blue-300"
+      : "hover:underline";
   };
 
   return (
@@ -45,12 +48,9 @@ export default function AdminLayout() {
               action="/admin/logout"
               style={{ display: "inline" }}
             >
-              <button
-                type="submit"
-                className="px-3 py-1 bg-red-600 hover:bg-red-700 rounded text-sm"
-              >
+              <Button type="submit" variant="danger" size="sm">
                 Logout
-              </button>
+              </Button>
             </Form>
           </div>
         </div>

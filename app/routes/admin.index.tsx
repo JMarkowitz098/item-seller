@@ -2,7 +2,7 @@ import type { Route } from "./+types/admin.index";
 import { useLoaderData } from "react-router";
 import { db } from "~/server/db/index.js";
 import { items as itemsTable } from "~/server/db/schema.js";
-import { AdminItemsList } from "~/components/AdminItemsList";
+import { ItemsTable } from "~/components/ItemsTable";
 import { requireAdminAuth } from "~/server/requireAuth";
 import type { Item } from "~/components/ItemCard";
 import { eq } from "drizzle-orm";
@@ -41,7 +41,28 @@ export default function AdminIndex() {
           Download PDF
         </a>
       </div>
-      <AdminItemsList items={items} />
+      <ItemsTable
+        items={items}
+        title="Admin - My Stuff"
+        showAddButton
+        actions={[
+          {
+            type: "edit",
+            label: "Edit",
+            route: "",
+          },
+          {
+            type: "mark-sold",
+            label: "Mark as Sold",
+            route: "/admin/mark-sold",
+          },
+          {
+            type: "delete",
+            label: "Delete",
+            route: "/admin/items/delete",
+          },
+        ]}
+      />
     </div>
   );
 }

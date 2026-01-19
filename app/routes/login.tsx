@@ -2,6 +2,7 @@ import type { Route } from "./+types/login";
 import { redirect, useActionData } from "react-router";
 import { verifyPassword, verifyTOTP } from "~/server/auth";
 import { createSession, getSession } from "~/server/session";
+import { Button } from "~/components/Button";
 
 export async function loader({ request }: Route.LoaderArgs) {
   const session = await getSession(request);
@@ -57,7 +58,7 @@ export default function LoginPage() {
               type="password"
               name="password"
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
               placeholder="Enter admin password"
             />
           </div>
@@ -71,7 +72,7 @@ export default function LoginPage() {
               name="totp"
               pattern="[0-9]{6}"
               maxLength={6}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
               placeholder="000000"
             />
             <p className="text-xs text-gray-500 mt-1">
@@ -79,12 +80,9 @@ export default function LoginPage() {
             </p>
           </div>
 
-          <button
-            type="submit"
-            className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-          >
+          <Button type="submit" variant="primary" size="md" className="w-full">
             Login
-          </button>
+          </Button>
         </form>
 
         <p className="text-xs text-gray-500 mt-4 text-center">
