@@ -1,27 +1,24 @@
-type Item = {
-  id: Number;
+import { useLoaderData } from "react-router";
+import { db } from "~/server/db/index.js";
+import { items as itemsTable } from "~/server/db/schema.js";
+
+export type Item = {
+  id: number;
   label: string;
   description: string;
-  price: Number;
+  price: number;
   image_path: string;
 };
 
-const data: Item[] = [
-  {
-    id: 1,
-    label: "bed_1",
-    description: "IKEA Bed Frame",
-    price: 150.5,
-    image_path: "/images/bed.jpg",
-  },
-  {
-    id: 2,
-    label: "bed_2",
-    description: "Other IKEA Bed Frame",
-    price: 250.5,
-    image_path: "/images/bed.jpg",
-  },
-];
+export async function loader() {
+  try {
+    const allItems = await db.select().from(itemsTable);
+    return allItems;
+  } catch (error) {
+    console.error("Error loading items:", error);
+    return [];
+  }
+}
 
 const renderItem = (item: Item) => {
   const { id, label, description, price, image_path } = item;
@@ -35,11 +32,20 @@ const renderItem = (item: Item) => {
     </section>
   );
 };
+
 export function Welcome() {
+  const items = useLoaderData<typeof loader>();
+
   return (
     <main className="p-8">
       <h1 className="text-3xl font-bold mb-8">My Stuff</h1>
-      <div className="items-grid">{data.map((item) => renderItem(item))}</div>
+      {items.length === 0 ? (
+        <p className="text-center">No items found</p>
+      ) : (
+        <div className="items-grid">
+          {items.map((item) => renderItem(item))}
+        </div>
+      )}
     </main>
   );
 }
