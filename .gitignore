@@ -6,4 +6,8 @@
 /.react-router/
 /build/
 
-local.db
+# Backup the database by NOT ignoring it
+# local.db
+
+# But ignore backup folder (too many files)
+backups/

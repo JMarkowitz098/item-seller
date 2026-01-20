@@ -1,7 +1,10 @@
 import { createClient } from "@libsql/client";
 import { eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/libsql";
-import { items as itemsTable } from "../app/server/db/schema.js";
+import {
+  items as itemsTable,
+  settings as settingsTable,
+} from "../app/server/db/schema.js";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -22,7 +25,7 @@ const client = createClient({
 const db = drizzle(client);
 
 async function buildStatic() {
-  console.log("Fetching items from Turso...");
+  console.log("Fetching items from database...");
 
   // Fetch all unsold items
   const allItems = await db
@@ -31,6 +34,10 @@ async function buildStatic() {
     .where(eq(itemsTable.sold, false));
 
   console.log(`Found ${allItems.length} unsold items`);
+
+  // Fetch contact settings
+  const settingsData = await db.select().from(settingsTable).limit(1);
+  const settings = settingsData[0] || null;
 
   // Create docs directory for GitHub Pages
   const docsDir = path.join(__dirname, "..", "docs");
@@ -100,9 +107,44 @@ async function buildStatic() {
       }
     }
   </style>
+  <script>
+    // Bot-proof contact info decoder
+    function decodeContact() {
+      const els = document.querySelectorAll('[data-contact]');
+      els.forEach(el => {
+        try {
+          el.textContent = atob(el.getAttribute('data-contact'));
+          if (el.tagName === 'A') {
+            const val = el.textContent;
+            if (val.includes('@')) {
+              el.href = 'mailto:' + val;
+            } else {
+              el.href = 'tel:' + val.replace(/[^0-9]/g, '');
+            }
+          }
+        } catch(e) {}
+      });
+    }
+    window.addEventListener('DOMContentLoaded', decodeContact);
+  </script>
 </head>
 <body class="bg-gray-50 min-h-screen">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-12">
+    ${
+      settings &&
+      (settings.contactName || settings.contactPhone || settings.contactEmail)
+        ? `
+    <div class="bg-white rounded-lg shadow-sm p-4 sm:p-6 mb-8 text-center">
+      <h2 class="text-lg sm:text-xl font-semibold text-gray-900 mb-3">Contact Information</h2>
+      <div class="space-y-2 text-sm sm:text-base text-gray-700">
+        ${settings.contactName ? `<p><strong>Name:</strong> ${settings.contactName}</p>` : ""}
+        ${settings.contactPhone ? `<p><strong>Phone:</strong> <a data-contact="${Buffer.from(settings.contactPhone).toString("base64")}" class="text-blue-600 hover:underline"></a></p>` : ""}
+        ${settings.contactEmail ? `<p><strong>Email:</strong> <a data-contact="${Buffer.from(settings.contactEmail).toString("base64")}" class="text-blue-600 hover:underline"></a></p>` : ""}
+      </div>
+    </div>
+    `
+        : ""
+    }
     <header class="text-center mb-8 sm:mb-12">
       <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">Welcome to My Inventory</h1>
       <p class="text-base sm:text-lg text-gray-600">Browse our available items</p>

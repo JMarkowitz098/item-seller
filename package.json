@@ -5,6 +5,8 @@
   "scripts": {
     "build": "react-router build",
     "build:static": "node --no-deprecation --import tsx scripts/build-static.ts",
+    "publish": "npm run build:static && git add docs/ && git commit -m 'Update inventory' && git push",
+    "backup": "bash scripts/backup-db.sh",
     "dev": "react-router dev",
     "start": "react-router-serve ./build/server/index.js",
     "typecheck": "react-router typegen && tsc",
