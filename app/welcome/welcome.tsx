@@ -124,10 +124,10 @@ export function Welcome() {
 
         <header className="text-center mb-8 sm:mb-12">
           <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">
-            Welcome to My Inventory
+            For Sale
           </h1>
           <p className="text-base sm:text-lg text-gray-600">
-            Browse our available items
+            Please email or text if interested
           </p>
         </header>
 

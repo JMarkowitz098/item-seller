@@ -23,10 +23,10 @@ export async function loader({ request }: Route.LoaderArgs) {
     const settingsData = await db.select().from(settingsTable).limit(1);
     const settings = (settingsData[0] || null) as Settings | null;
 
-    // Get the origin from request headers
-    const origin = request.headers.get("origin") || "http://localhost:5173";
+    // Use GitHub Pages URL for QR code
+    const publicUrl = "https://jmarkowitz098.github.io/item-seller/";
 
-    const doc = await generateItemsPDF(items, origin, settings);
+    const doc = await generateItemsPDF(items, publicUrl, settings);
 
     // Convert to buffer
     return new Promise((resolve, reject) => {
