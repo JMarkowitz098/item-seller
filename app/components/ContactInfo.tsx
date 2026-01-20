@@ -6,6 +6,35 @@ interface ContactInfoProps {
   settings?: Settings | null;
 }
 
+interface FormFieldProps {
+  label: string;
+  name: string;
+  type: string;
+  placeholder: string;
+  defaultValue: string;
+}
+
+function FormField({
+  label,
+  name,
+  type,
+  placeholder,
+  defaultValue,
+}: FormFieldProps) {
+  return (
+    <div>
+      <label className="block text-sm font-medium mb-1">{label}</label>
+      <input
+        type={type}
+        name={name}
+        defaultValue={defaultValue}
+        placeholder={placeholder}
+        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+      />
+    </div>
+  );
+}
+
 export function ContactInfo({ settings }: ContactInfoProps) {
   return (
     <div className="bg-white rounded-lg shadow p-8 mb-8">
@@ -15,38 +44,29 @@ export function ContactInfo({ settings }: ContactInfoProps) {
         action="/admin/contact"
         className="space-y-4 max-w-2xl"
       >
-        <div>
-          <label className="block text-sm font-medium mb-1">Name</label>
-          <input
-            type="text"
-            name="contactName"
-            defaultValue={settings?.contactName || ""}
-            placeholder="Your name"
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-          />
-        </div>
+        <FormField
+          label="Name"
+          name="contactName"
+          type="text"
+          placeholder="Your name"
+          defaultValue={settings?.contactName || ""}
+        />
 
-        <div>
-          <label className="block text-sm font-medium mb-1">Phone</label>
-          <input
-            type="tel"
-            name="contactPhone"
-            defaultValue={settings?.contactPhone || ""}
-            placeholder="Your phone number"
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-          />
-        </div>
+        <FormField
+          label="Phone"
+          name="contactPhone"
+          type="tel"
+          placeholder="Your phone number"
+          defaultValue={settings?.contactPhone || ""}
+        />
 
-        <div>
-          <label className="block text-sm font-medium mb-1">Email</label>
-          <input
-            type="email"
-            name="contactEmail"
-            defaultValue={settings?.contactEmail || ""}
-            placeholder="Your email"
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-          />
-        </div>
+        <FormField
+          label="Email"
+          name="contactEmail"
+          type="email"
+          placeholder="Your email"
+          defaultValue={settings?.contactEmail || ""}
+        />
 
         <Button type="submit" variant="primary" size="md">
           Save Contact Info

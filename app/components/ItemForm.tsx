@@ -2,6 +2,41 @@ import { Form } from "react-router";
 import { Button } from "./Button";
 import type { Item } from "./ItemCard";
 
+interface FormFieldProps {
+  label: string;
+  name: string;
+  type: string;
+  defaultValue?: string | number;
+  required?: boolean;
+  step?: string;
+  accept?: string;
+}
+
+function FormField({
+  label,
+  name,
+  type,
+  defaultValue,
+  required,
+  step,
+  accept,
+}: FormFieldProps) {
+  return (
+    <div>
+      <label className="block text-sm font-medium mb-1">{label}</label>
+      <input
+        type={type}
+        name={name}
+        defaultValue={defaultValue}
+        required={required}
+        step={step}
+        accept={accept}
+        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+      />
+    </div>
+  );
+}
+
 export function ItemForm({
   item,
   isLoading = false,
@@ -15,39 +50,30 @@ export function ItemForm({
       encType="multipart/form-data"
       className="space-y-4 max-w-2xl"
     >
-      <div>
-        <label className="block text-sm font-medium mb-1">Label</label>
-        <input
-          type="text"
-          name="label"
-          defaultValue={item?.label || ""}
-          required
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-        />
-      </div>
+      <FormField
+        label="Label"
+        name="label"
+        type="text"
+        defaultValue={item?.label || ""}
+        required
+      />
 
-      <div>
-        <label className="block text-sm font-medium mb-1">Description</label>
-        <input
-          type="text"
-          name="description"
-          defaultValue={item?.description || ""}
-          required
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-        />
-      </div>
+      <FormField
+        label="Description"
+        name="description"
+        type="text"
+        defaultValue={item?.description || ""}
+        required
+      />
 
-      <div>
-        <label className="block text-sm font-medium mb-1">Price</label>
-        <input
-          type="number"
-          name="price"
-          step="0.01"
-          defaultValue={item?.price || ""}
-          required
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-        />
-      </div>
+      <FormField
+        label="Price"
+        name="price"
+        type="number"
+        step="0.01"
+        defaultValue={item?.price || ""}
+        required
+      />
 
       <div>
         <label className="block text-sm font-medium mb-1">Image</label>

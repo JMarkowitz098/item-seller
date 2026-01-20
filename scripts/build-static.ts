@@ -50,23 +50,10 @@ async function buildStatic() {
     fs.mkdirSync(docsImagesDir, { recursive: true });
   }
 
-  // Copy images to docs/images
+  // Copy images from /public/images to docs/images
   const projectRoot = path.join(__dirname, "..");
-  const imagesDir = path.join(projectRoot, "images");
   const publicImagesDir = path.join(projectRoot, "public", "images");
 
-  // Copy from /images directory
-  if (fs.existsSync(imagesDir)) {
-    const imageFiles = fs.readdirSync(imagesDir);
-    imageFiles.forEach((file) => {
-      const srcPath = path.join(imagesDir, file);
-      const destPath = path.join(docsImagesDir, file);
-      fs.copyFileSync(srcPath, destPath);
-      console.log(`Copied: ${file}`);
-    });
-  }
-
-  // Copy from /public/images directory if it exists
   if (fs.existsSync(publicImagesDir)) {
     const imageFiles = fs.readdirSync(publicImagesDir);
     imageFiles.forEach((file) => {
