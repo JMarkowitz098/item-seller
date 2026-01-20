@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Inventory</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+    /* Mobile optimizations */
+    @media (max-width: 768px) {
+      .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+      h1 {
+        font-size: 2rem !important;
+        line-height: 1.2;
+      }
+      .card-title {
+        font-size: 1.125rem !important;
+      }
+      .card-price {
+        font-size: 1.5rem !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-12">
+    <header class="text-center mb-8 sm:mb-12">
+      <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">Welcome to My Inventory</h1>
+      <p class="text-base sm:text-lg text-gray-600">Browse our available items</p>
+    </header>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+      
+        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+          <img src="images/1768784343997_Sniper._Ragnarok.Online_.full.638118.jpg" alt="Sniper Ragnarok Online Poster" class="w-full h-40 sm:h-48 object-contain bg-gray-100">
+          <div class="p-4 sm:p-6">
+            <h3 class="card-title text-lg sm:text-xl font-semibold text-gray-900 mb-2">Sniper Ragnarok Online Poster</h3>
+            <p class="card-price text-xl sm:text-2xl font-bold text-blue-600">$15.99</p>
+          </div>
+        </div>
+      
+        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+          <img src="images/1768842635419_banana_bed.jpeg" alt="Banana Bed Frame - Yellow" class="w-full h-40 sm:h-48 object-contain bg-gray-100">
+          <div class="p-4 sm:p-6">
+            <h3 class="card-title text-lg sm:text-xl font-semibold text-gray-900 mb-2">Banana Bed Frame - Yellow</h3>
+            <p class="card-price text-xl sm:text-2xl font-bold text-blue-600">$199.99</p>
+          </div>
+        </div>
+      
+        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+          <img src="images/1768842739125_banana_bed.jpeg" alt="Banana Bed Frame - Classic" class="w-full h-40 sm:h-48 object-contain bg-gray-100">
+          <div class="p-4 sm:p-6">
+            <h3 class="card-title text-lg sm:text-xl font-semibold text-gray-900 mb-2">Banana Bed Frame - Classic</h3>
+            <p class="card-price text-xl sm:text-2xl font-bold text-blue-600">$189.99</p>
+          </div>
+        </div>
+      
+        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+          <img src="images/1768784343997_Sniper._Ragnarok.Online_.full.638118.jpg" alt="Sniper Ragnarok Online Poster" class="w-full h-40 sm:h-48 object-contain bg-gray-100">
+          <div class="p-4 sm:p-6">
+            <h3 class="card-title text-lg sm:text-xl font-semibold text-gray-900 mb-2">Sniper Ragnarok Online Poster</h3>
+            <p class="card-price text-xl sm:text-2xl font-bold text-blue-600">$15.99</p>
+          </div>
+        </div>
+      
+        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+          <img src="images/1768842635419_banana_bed.jpeg" alt="Banana Bed Frame - Yellow" class="w-full h-40 sm:h-48 object-contain bg-gray-100">
+          <div class="p-4 sm:p-6">
+            <h3 class="card-title text-lg sm:text-xl font-semibold text-gray-900 mb-2">Banana Bed Frame - Yellow</h3>
+            <p class="card-price text-xl sm:text-2xl font-bold text-blue-600">$199.99</p>
+          </div>
+        </div>
+      
+        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+          <img src="images/1768842739125_banana_bed.jpeg" alt="Banana Bed Frame - Classic" class="w-full h-40 sm:h-48 object-contain bg-gray-100">
+          <div class="p-4 sm:p-6">
+            <h3 class="card-title text-lg sm:text-xl font-semibold text-gray-900 mb-2">Banana Bed Frame - Classic</h3>
+            <p class="card-price text-xl sm:text-2xl font-bold text-blue-600">$189.99</p>
+          </div>
+        </div>
+      
+    </div>
+
+    
+
+    <footer class="text-center mt-12 text-gray-500 text-sm">
+      <p>Last updated: 1/20/2026, 2:12:04 PM</p>
+    </footer>
+  </div>
+</body>
+</html>

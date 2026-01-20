@@ -15,11 +15,11 @@ export async function generateItemsPDF(
   const qrImage = await QRCode.toDataURL(qrCodeUrl);
 
   // Add title
-  doc.fontSize(28).font("Helvetica-Bold").text("My Stuff", { align: "center" });
+  doc.fontSize(28).font("Helvetica-Bold").text("For Sale", { align: "center" });
   doc
     .fontSize(12)
     .font("Helvetica")
-    .text("Items List & Catalog", { align: "center" });
+    .text("Please email or text if interested", { align: "center" });
   doc.moveDown(1.5);
 
   // Add contact info if available
